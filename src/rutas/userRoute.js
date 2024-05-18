@@ -1,6 +1,6 @@
 import express from "express";
-import {create} from "../controllers/userController.js";
-import { get } from "mongoose";
+import {create, get} from "../controllers/userController.js";
+
 
 const userRoute = express.Router();
 

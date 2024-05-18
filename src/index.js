@@ -15,7 +15,7 @@ const MONGOURI = process.env.MONGODB_URI;
 
 mongoose.connect(MONGOURI).then(() => {
     console.log("Database Connected")
-    app.listen(PORT, () =>{
+    app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
     });
 }
