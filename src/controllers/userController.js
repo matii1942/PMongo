@@ -20,7 +20,7 @@ export const create = async (req, res) => {
         res.status(200).json(saveUser);
 
     } catch (error) {
-        res.status(500).json ({error: "No se puedem encontrar los usuarios"});
+        res.status(500).json ({error: "No se puede encontrar los usuarios"});
         
     }
 };
@@ -39,17 +39,25 @@ export const get = async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        const id = req.param.id
+        const id = req.params.id
         const userExist= await User.findOne({_id: id});
         if (!userExist) {
             return res.status(404).json ({message:"Usuario no encontrado"});
         }
-        const updateUser = User.findByIdAndUpdate({_id:id}, req.body, {
+        const updateUser = await User.findByIdAndUpdate({_id:id}, req.body, {
             new:true});
             res.status(201).json(updateUser);
         
     } catch (error) {
         res.status(500).json
 ({error: "Error interno en el servidor"})        
+    }
+}
+
+export const deletedUser = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        
     }
 }
