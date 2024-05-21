@@ -3,7 +3,7 @@ import Product from "../models/productModel.js";
 //traemos los productos creados
 export const getAll = async (req, res) => {
     try {
-        const products = await product.find();
+        const products = await Product.find();
         if (products.length === 0){
             return res.status(404).json ({message: "No se encontro el producto"})
         }
