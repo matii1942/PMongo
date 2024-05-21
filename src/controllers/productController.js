@@ -4,7 +4,7 @@ import Product from "../models/productModel.js";
 export const getAll = async (req, res) => {
     try {
         const products = await product.find();
-        if (products.lenght === 0){
+        if (products.length === 0){
             return res.status(404).json ({message: "No se encontro el producto"})
         }
         res.status(200).json(products)
@@ -18,11 +18,11 @@ export const create = async (req, res) =>{
     try {
         const productData = new Product(req.body);
         const {name} = productData;
-        const productExist = await Product.findone({name})
+        const productExist = await Product.findOne({name})
         if (productExist){
             return res.status(400).json ({ message: `producto ${name} ya existe`})
         }
-        const savedProduct = await productData(save)
+        const savedProduct = await productData.save();
         res.status(200).json(savedProduct)
             
 

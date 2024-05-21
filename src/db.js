@@ -9,9 +9,9 @@ const MONGOURI = process.env.MONGODB_URI;
 export const connectDB = async () => {
   try {
     await mongoose.connect(MONGOURI);
-    console.log("Database connected");
+    console.log("Base de datos conectada");
   } catch (error) {
-    console.error("Error connecting to database:", error);
+    console.error("Error al conectarse a la base de datos:", error);
     process.exit(1);
   }
 };
