@@ -31,7 +31,7 @@ export const create = async (req, res) =>{
     }
 };
 
-//buscamos el producto uno a la vez
+//Buscamos el producto uno a la vez
 
 export const findOne = async (req, res) => {
     try {
@@ -46,6 +46,7 @@ export const findOne = async (req, res) => {
         res.status(500).json({message:"Error interno en el server",error })
     }
 }
+// cambiamos el producto
 
 export const update = async (req, res) => {
     try {
@@ -60,6 +61,7 @@ export const update = async (req, res) => {
         res.status(500).json({message: "Error en el Server"})
     }
 }
+//Borramos el producto
 
 export const deleteProduct = async (req, res) =>{
     try {

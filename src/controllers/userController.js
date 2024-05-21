@@ -1,6 +1,6 @@
 import User from "../models/userModel.js"
 
-
+// Creamos el usuario
 export const create = async (req, res) => {
     try { 
         //tomamos los datos del body
@@ -24,7 +24,7 @@ export const create = async (req, res) => {
         
     }
 };
-
+//Buscamos el usuario por metodo getAll
 export const get = async (req, res) => {
     try {
         const users = await User.find();
@@ -36,7 +36,7 @@ export const get = async (req, res) => {
         res.status(500).json({error:  "Error interno en el servidor"})
     }
 }
-
+// Cambiamos datos del usuario
 export const update = async (req, res) => {
     try {
         const id = req.params.id
@@ -53,7 +53,7 @@ export const update = async (req, res) => {
 ({error: "Error interno en el servidor"})        
     }
 }
-
+//Borramos el usuario
 export const destroyed = async (req, res) => {
     try {
         const _id = req.params.id
