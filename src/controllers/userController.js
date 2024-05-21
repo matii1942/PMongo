@@ -54,10 +54,16 @@ export const update = async (req, res) => {
     }
 }
 
-export const deletedUser = async (req, res) => {
+export const destroyed = async (req, res) => {
     try {
-        
-    } catch (error) {
-        
+        const _id = req.params.id
+        const userExist = await User.findeone({_id});
+    if (!userExist) {
+        return res.status(404).json ({message: "El usuario no a sido encontrado"});
     }
-}
+    await User.findByIdAndDelete(_id)
+    res.status(201).json({message: "El usuario fue borrado exitosamente"})
+    } catch (error) {
+        res.status(500).json ({message: "Error interno en el server"})
+    }
+};

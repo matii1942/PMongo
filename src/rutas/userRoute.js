@@ -1,5 +1,5 @@
 import express from "express";
-import {create, get, update} from "../controllers/userController.js";
+import {create, get, update, destroyed} from "../controllers/userController.js";
 
 
 const userRoute = express.Router();
@@ -9,6 +9,6 @@ const userRoute = express.Router();
 userRoute.post("/create", create);
 userRoute.get("/getAll", get);
 userRoute.put("/update/:id",update);
-userRoute.delete("/detele", delete)
+userRoute.delete("/destroyed", destroyed)
 
 export default userRoute;
