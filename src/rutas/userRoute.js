@@ -9,6 +9,6 @@ const userRoute = express.Router();
 userRoute.post("/create", create);
 userRoute.get("/getAll", get);
 userRoute.put("/update/:id",update);
-userRoute.delete("/destroyed", destroyed)
+userRoute.delete("/destroyed/:id", destroyed)
 
 export default userRoute;
