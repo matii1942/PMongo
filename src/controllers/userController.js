@@ -1,4 +1,6 @@
 import User from "../models/userModel.js"
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 // Creamos el usuario
 export const create = async (req, res) => {
@@ -67,3 +69,32 @@ export const destroyed = async (req, res) => {
         res.status(500).json ({message: "Error interno en el server"})
     }
 };
+export const validate = async (req, res) => {
+    try {
+      const userFound = await User.findOne({ email: req.body.email });
+      console.log(userFound);
+      if (!userFound) {
+        res
+          .status(400)
+          .json({ message: "El email y/o la contraseña son incorrectos" });
+      }
+      //Encriptamos y la comparamos con la guardada
+      if (bcrypt.compareSync(req.body.password, userFound.password)) {
+        //Para firmar el token hacemos el payload, con secreto y tiempo de expiracion
+        const payload = {
+          userId: userFound._id,
+          userEmail: userFound.email,
+        };
+        //Firmamos el token
+        const token = jwt.sign(payload, "secreto", { expiresIn: "1h" });
+        res.status(200).json({ token });
+      } else {
+        res
+          .status(400)
+          .json({ message: "El email y/o contraseña son incorrectos" });
+        return;
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Internal server error" });
+    }
+  };

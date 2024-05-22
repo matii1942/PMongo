@@ -1,4 +1,4 @@
-import { populate } from "dotenv";
+
 import Category from "../models/categoryModel.js"
 
 export const create = async (req, res) => {
