@@ -1,6 +1,7 @@
 import User from "../models/userModel.js"
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { getAll } from "./productController.js";
 
 // Creamos el usuario
 export const create = async (req, res) => {
@@ -16,7 +17,7 @@ export const create = async (req, res) => {
         }
         //valido si existe el usuario
         //guardo el usuario
-        const saveUser = await userData.save();
+        await userData.save();
        
         //muestro informacion del usuario
         res.status(200).json(saveUser);
@@ -29,11 +30,11 @@ export const create = async (req, res) => {
 //Buscamos el usuario por metodo getAll
 export const get = async (req, res) => {
     try {
-        const users = await User.find();
-        if (users.lenght === 0){
+        const users = await User.find().lean();
+        if (users.length === 0){
             return res.status(404).json({message : "no hay usuarios"});
         }
-        res.status(200).json(users);
+        res.render("getAll", {users: users});
     } catch (error) {
         res.status(500).json({error:  "Error interno en el servidor"})
     }
@@ -48,7 +49,7 @@ export const update = async (req, res) => {
         }
         const updateUser = await User.findByIdAndUpdate({_id:id}, req.body, {
             new:true});
-            res.status(201).json(updateUser);
+        res.status(201).json(updateUser);
         
     } catch (error) {
         res.status(500).json
@@ -98,3 +99,8 @@ export const validate = async (req, res) => {
       res.status(500).json({ message: "Internal server error" });
     }
   };
+
+  export const updateView = (req, res) => {
+    req.params.id
+    res.render("update")
+  }
